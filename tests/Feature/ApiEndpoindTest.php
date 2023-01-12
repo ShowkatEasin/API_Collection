@@ -10,12 +10,21 @@ class ApiEndpoindTest extends TestCase
 {
     public function it_list_down_all_users()
     {
+        User::factory()->create();
 
         $response = $this->get( uri: '/api/users');
 
         $response->assertStatus(status: 200);
 
-        
+        $response->assertJson([
+
+            [
+                'name' => 'osman',
+                'email' => 'osman@gnail.com',
+            ]
+
+        ]);
+ 
     }
     public function it_shows_details_of_a_user_to_authenticated_user (){
 
